@@ -13,6 +13,7 @@ namespace Soundy.Web
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+           
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

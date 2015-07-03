@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Soundy.Core.Repositories;
+using Soundy.Data.Model;
 
 namespace Soundy.Web.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+           
+        }
         public ActionResult Index()
         {
             return View();
