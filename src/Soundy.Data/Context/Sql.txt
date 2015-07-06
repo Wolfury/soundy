@@ -1,0 +1,50 @@
+﻿GO
+CREATE TABLE [dbo].[Authors] (
+    [Id] [int] NOT NULL IDENTITY,
+    [FullName] [nvarchar](max),
+    [BirthDate] [datetime] NOT NULL,
+    [ProfilePhotoUrl] [nvarchar](max),
+    CONSTRAINT [PK_dbo.Authors] PRIMARY KEY ([Id])
+)
+GO
+CREATE TABLE [dbo].[Songs] (
+    [Id] [int] NOT NULL IDENTITY,
+    [Title] [nvarchar](max),
+    [CoverUrl] [nvarchar](max),
+    [FileUrl] [nvarchar](max),
+    [AuthorId] [int] NOT NULL,
+    [DateReleased] [datetime] NOT NULL,
+    CONSTRAINT [PK_dbo.Songs] PRIMARY KEY ([Id])
+)
+GO
+CREATE TABLE [dbo].[Playlists] (
+    [Id] [int] NOT NULL IDENTITY,
+    [Title] [nvarchar](max),
+    [DateCreated] [datetime] NOT NULL,
+    CONSTRAINT [PK_dbo.Playlists] PRIMARY KEY ([Id])
+)
+GO
+CREATE TABLE [dbo].[PlaylistsSongs] (
+    [PlaylistId] [int] NOT NULL,
+    [SongId] [int] NOT NULL,
+    CONSTRAINT [PK_dbo.PlaylistsSongs] PRIMARY KEY ([PlaylistId], [SongId])
+)
+GO
+CREATE INDEX [IX_AuthorId] ON [dbo].[Songs]([AuthorId])
+CREATE INDEX [IX_PlaylistId] ON [dbo].[PlaylistsSongs]([PlaylistId])
+CREATE INDEX [IX_SongId] ON [dbo].[PlaylistsSongs]([SongId])
+
+GO
+ALTER TABLE [dbo].[Songs] ADD CONSTRAINT [FK_dbo.Songs_dbo.Authors_AuthorId] FOREIGN KEY ([AuthorId]) REFERENCES [dbo].[Authors] ([Id]) ON DELETE CASCADE
+ALTER TABLE [dbo].[PlaylistsSongs] ADD CONSTRAINT [FK_dbo.PlaylistsSongs_dbo.Playlists_PlaylistId] FOREIGN KEY ([PlaylistId]) REFERENCES [dbo].[Playlists] ([Id]) ON DELETE CASCADE
+ALTER TABLE [dbo].[PlaylistsSongs] ADD CONSTRAINT [FK_dbo.PlaylistsSongs_dbo.Songs_SongId] FOREIGN KEY ([SongId]) REFERENCES [dbo].[Songs] ([Id]) ON DELETE CASCADE
+
+GO
+CREATE TABLE [dbo].[__MigrationHistory] 
+(
+    [MigrationId] [nvarchar](150) NOT NULL,
+    [ContextKey] [nvarchar](300) NOT NULL,
+    [Model] [varbinary](max) NOT NULL,
+    [ProductVersion] [nvarchar](32) NOT NULL,
+    CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY ([MigrationId], [ContextKey])
+)

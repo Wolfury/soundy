@@ -30,19 +30,24 @@ namespace Soundy.Web.Controllers
             return Task.Run(async () => PlaylistMapper.Map(await PlaylistRepository.GetAsync()));
         }
 
-        public async Task<PlaylistDTO> Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
-            return PlaylistMapper.Map(await PlaylistRepository.GetAsync(id));
+            var result = await PlaylistRepository.GetAsync(id);
+            if (result != null)
+            {
+                return Ok(PlaylistMapper.Map(result));
+            }
+            return NotFound();
         }
 
-        public async Task<IHttpActionResult> Post([FromBody]PlaylistDTO model)
+        public async Task<IHttpActionResult> Create([FromBody]PlaylistDTO model)
         {
             PlaylistRepository.Insert(PlaylistMapper.Map(model));
             await PlaylistRepository.SaveAsync();
             return Ok();
         }
 
-        public async Task<IHttpActionResult> Put(int id, [FromBody]PlaylistDTO model)
+        public async Task<IHttpActionResult> Update(int id, [FromBody]PlaylistDTO model)
         {
             PlaylistRepository.Update(PlaylistMapper.Map(model));
             await PlaylistRepository.SaveAsync();

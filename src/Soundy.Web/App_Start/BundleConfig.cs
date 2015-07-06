@@ -5,7 +5,7 @@ namespace Soundy.Web
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -14,8 +14,6 @@ namespace Soundy.Web
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/Vendor/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/Vendor/modernizr-*"));
 
@@ -26,6 +24,20 @@ namespace Soundy.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+
+            //Angular Bundle
+
+            bundles.Add(new ScriptBundle("~/bundles/angularJs").Include(
+                      "~/Scripts/Vendor/Angular/angular.js",
+                      "~/Scripts/Vendor/Angular/angular-mocks.js",
+                      "~/Scripts/Vendor/Angular/angular-animate.js",
+                      "~/Scripts/Vendor/Angular/angular-route.js",
+                      "~/Scripts/Vendor/Angular/angular-sanitize.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                       "~/Scripts/App/app.js",
+                       "~/Scripts/App/controllers/shellController.js"));
         }
     }
 }

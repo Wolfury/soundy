@@ -30,19 +30,24 @@ namespace Soundy.Web.Controllers
             return Task.Run(async () => AuthorMapper.Map(await AuthorRepository.GetAsync()));
         }
 
-        public async Task<AuthorDTO> Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
-            return AuthorMapper.Map(await AuthorRepository.GetAsync(id));
+            var result = await AuthorRepository.GetAsync(id);
+            if (result != null)
+            {
+                return Ok(AuthorMapper.Map(result));
+            }
+            return NotFound();
         }
 
-        public async Task<IHttpActionResult> Post([FromBody]AuthorDTO model)
+        public async Task<IHttpActionResult> Create([FromBody]AuthorDTO model)
         {
             AuthorRepository.Insert(AuthorMapper.Map(model));
             await AuthorRepository.SaveAsync();
             return Ok();
         }
 
-        public async Task<IHttpActionResult> Put(int id, [FromBody]AuthorDTO model)
+        public async Task<IHttpActionResult> Update(int id, [FromBody]AuthorDTO model)
         {
             AuthorRepository.Update(AuthorMapper.Map(model));
             await AuthorRepository.SaveAsync();
