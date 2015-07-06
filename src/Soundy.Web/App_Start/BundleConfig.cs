@@ -9,22 +9,14 @@ namespace Soundy.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/Vendor/jquery-{version}.js"));
+                        "~/Scripts/Vendor/jquery-{version}.js",
+                        "~/Scripts/Vendor/toastr.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/Vendor/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/Vendor/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/Vendor/bootstrap.js",
-                      "~/Scripts/Vendor/respond.js"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
-
 
             //Angular Bundle
 
@@ -37,7 +29,9 @@ namespace Soundy.Web
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                        "~/Scripts/App/app.js",
-                       "~/Scripts/App/controllers/shellController.js"));
+                       "~/Scripts/App/controllers/shellController.js",
+                       "~/Scripts/App/services/songsService.js",
+                       "~/Scripts/App/controllers/songsController.js"));
         }
     }
 }

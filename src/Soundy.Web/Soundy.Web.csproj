@@ -174,14 +174,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\readme.txt" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\toastr.css" />
+    <Content Include="Content\css\toastr.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\controllers\songsController.js" />
     <Content Include="Scripts\App\controllers\shellController.js" />
+    <Content Include="Scripts\App\services\authorsService.js" />
+    <Content Include="Scripts\App\services\playlistsService.js" />
+    <Content Include="Scripts\App\services\songsService.js" />
+    <Content Include="Scripts\App\views\songs\list.html" />
+    <Content Include="Scripts\Vendor\toastr.js" />
+    <Content Include="Scripts\Vendor\toastr.min.js" />
     <Content Include="Scripts\Vendor\Angular\angular-animate.js" />
     <Content Include="Scripts\Vendor\Angular\angular-animate.min.js" />
     <Content Include="Scripts\Vendor\Angular\angular-mocks.js" />
@@ -193,13 +198,13 @@
     <Content Include="Scripts\Vendor\Angular\angular-sanitize.min.js" />
     <Content Include="Scripts\Vendor\Angular\angular.js" />
     <Content Include="Scripts\Vendor\Angular\angular.min.js" />
-    <Content Include="Scripts\Vendor\bootstrap.js" />
-    <Content Include="Scripts\Vendor\bootstrap.min.js" />
     <Content Include="Scripts\Vendor\Angular\angular.min.js.map" />
     <Content Include="Scripts\Vendor\Angular\angular-route.min.js.map" />
     <Content Include="Scripts\Vendor\Angular\angular-animate.min.js.map" />
     <Content Include="Scripts\Vendor\Angular\angular-resource.min.js.map" />
     <Content Include="Scripts\Vendor\Angular\angular-sanitize.min.js.map" />
+    <Content Include="Content\css\toastr.scss" />
+    <Content Include="Content\css\toastr.less" />
     <None Include="Scripts\Vendor\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Vendor\jquery-1.10.2.js" />
     <Content Include="Scripts\Vendor\jquery-1.10.2.min.js" />
@@ -231,13 +236,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\App\services\" />
-    <Folder Include="Scripts\App\views\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
