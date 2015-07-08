@@ -17,6 +17,16 @@ function songsService($http, $q)
         return deffered.promise;
     }
 
+    function shuffleSongs() {
+        var deffered = $q.defer();
+        $http.get('api/songs/shuffle').success(function (data) {
+            deffered.resolve(data);
+        }).error(function (error) {
+            deffered.reject(error);
+        });
+        return deffered.promise;
+    }
+
     function getSong(id) {
         var deffered = $q.defer();
         $http.get('api/songs/get/' + id).success(function (data) {
@@ -68,6 +78,7 @@ function songsService($http, $q)
     }
 
     this.getSongs = getSongs;
+    this.shuffleSongs = shuffleSongs;
     this.getSong = getSong;
     this.addSong = addSong;
     this.updateSong = updateSong;

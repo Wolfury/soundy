@@ -3,44 +3,74 @@
 <html ng-app="Soundy">
 <head>
     <base href="/">
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href="@Url.Content("~/Content/css/toastr.css")" rel="stylesheet"/>
+    <link href="@Url.Content("~/Content/css/toastr.css")" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 
+    <div ng-controller="ShellController">
+        <md-content class="layout" flex>
+            @* Toolbar *@
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Settings" ng-click="toggle()">
+                        <md-icon class="fa fa-bars fa-2x">
 
-<md-content class="layout" flex>
-    @* Toolbar *@
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Settings">
-                <md-icon class="fa fa-bars fa-2x">
+                        </md-icon>
+                    </md-button>
+                    <h2>
+                        <span>Soundy.</span>
+                    </h2>
+                    <span flex=""></span>
+                    <md-input-container style="padding:5px;">
+                        <md-icon style="padding:5px;" class="fa fa-search"></md-icon>
+                        <input ng-model="searchTerm" type="text" placeholder="Search" style="color:white;">
+                    </md-input-container>
 
-                </md-icon>
-            </md-button>
-            <h2>
-                <span>Soundy.</span>
-            </h2>
-            <span flex=""></span>
-            <md-button class="md-icon-button" aria-label="Refresh">
-                <md-icon class="fa fa-refresh fa-2x" style="color: greenyellow;"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Settings">
-                <md-icon class="fa fa-cog fa-2x"></md-icon>
-            </md-button>
-        </div>
+                    <md-button class="md-icon-button" aria-label="Refresh">
+                        <md-icon class="fa fa-refresh fa-2x" style="color: greenyellow;"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Settings">
+                        <md-icon class="fa fa-cog fa-2x"></md-icon>
+                    </md-button>
+                </div>
 
-    </md-toolbar>
+            </md-toolbar>
+        </md-content>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+            <md-toolbar class="md-theme-light">
+                <h1 class="md-toolbar-tools">Sidenav Right</h1>
+            </md-toolbar>
+            <md-content layout-padding>
+                <form>
+                    <md-input-container>
+                        <label for="testInput">Test input</label>
+                        <input type="text" id="testInput"
+                               ng-model="data" md-sidenav-focus>
+                    </md-input-container>
+                </form>
+                <md-button ng-click="showAddSong()" class="md-primary">
+                    <i class="fa fa-plus"></i> ADD SONG
+                </md-button>
+                <br />
+                <md-button ng-click="showAddPlaylist()" class="md-primary">
+                    <i class="fa fa-plus"></i> ADD PLAYLIST
+                </md-button>
+                <br />
+                <md-button ng-click="closeNav()" class="md-primary">
+                    DONE
+                </md-button>
+            </md-content>
+        </md-sidenav>
+    </div>
     @RenderBody()
-  
-</md-content>
 
 
 

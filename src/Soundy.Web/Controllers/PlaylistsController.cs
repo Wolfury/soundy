@@ -10,6 +10,7 @@ using Soundy.Core.DTOs;
 using Soundy.Core.Mappers;
 using Soundy.Core.Repositories;
 using Soundy.Data.Model;
+using Soundy.Core.Common;
 
 namespace Soundy.Web.Controllers
 {
@@ -65,6 +66,7 @@ namespace Soundy.Web.Controllers
 
         #region Additional
 
+        [HttpGet]
         public async Task<IHttpActionResult> AddSongToPlaylist(int playlistId, [FromBody] SongDTO song)
         {
             Playlist playlist = await PlaylistRepository.GetAsync(playlistId);
@@ -77,6 +79,7 @@ namespace Soundy.Web.Controllers
             return NotFound();
         }
 
+        [HttpGet]
         public async Task<IHttpActionResult> RemoveSongFromPlaylist(int playlistId, [FromBody] SongDTO song)
         {
             Playlist playlist = await PlaylistRepository.GetAsync(playlistId);
@@ -87,6 +90,12 @@ namespace Soundy.Web.Controllers
                 return Ok();
             }
             return NotFound();
+        }
+
+        [HttpGet]
+        public Task<ICollection<SongDTO>> Shuffle([FromUri]int id, [FromBody] PlaylistDTO playlist)
+        {
+            return Task.Run(() => SongMapper.Map(FisherYates.Shuffle<Song>(((PlaylistMapper.Map(playlist).Songs).ToArray<Song>()))));
         }
 
         #endregion

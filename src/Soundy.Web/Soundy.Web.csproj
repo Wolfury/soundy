@@ -179,12 +179,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\App\app.js" />
-    <Content Include="Scripts\App\controllers\songsController.js" />
+    <Content Include="Scripts\App\controllers\masterController.js" />
     <Content Include="Scripts\App\controllers\shellController.js" />
     <Content Include="Scripts\App\services\authorsService.js" />
     <Content Include="Scripts\App\services\playlistsService.js" />
     <Content Include="Scripts\App\services\songsService.js" />
-    <Content Include="Scripts\App\views\songs\list.html" />
+    <Content Include="Scripts\App\views\crud\songs\add-song.html" />
+    <Content Include="Scripts\App\views\master.html" />
     <Content Include="Scripts\Vendor\toastr.js" />
     <Content Include="Scripts\Vendor\toastr.min.js" />
     <Content Include="Scripts\Vendor\Angular\angular-animate.js" />

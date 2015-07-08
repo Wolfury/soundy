@@ -2,13 +2,13 @@
 
 app.config(function ($routeProvider) {
     $routeProvider.when("/songs/list", {
-        controller: "SongsController",
-        templateUrl: "/Scripts/App/views/songs/list.html"
+        controller: "MasterController",
+        templateUrl: "/Scripts/App/views/master.html"
     });
 
     $routeProvider.when("/", {
-        controller: "SongsController",
-        templateUrl: "/Scripts/App/views/songs/list.html"
+        controller: "MasterController",
+        templateUrl: "/Scripts/App/views/master.html"
     });
 
 

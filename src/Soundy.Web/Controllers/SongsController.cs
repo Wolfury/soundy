@@ -12,6 +12,7 @@ using Soundy.Core.Mappers;
 using Soundy.Core.Repositories;
 using Soundy.Data.Model;
 using WebGrease.Css.Extensions;
+using Soundy.Core.Common;
 
 namespace Soundy.Web.Controllers
 {
@@ -63,6 +64,12 @@ namespace Soundy.Web.Controllers
             return Ok();
         }
         #endregion
+
+        [HttpGet]
+        public Task<ICollection<SongDTO>> Shuffle()
+        {
+            return Task.Run(async () => SongMapper.Map(FisherYates.Shuffle<Song>(((await SongRepository.GetAsync()).ToArray<Song>()))));
+        }
 
         [HttpGet]
         public async Task<IHttpActionResult> Search([FromUri]string searchTerm)
