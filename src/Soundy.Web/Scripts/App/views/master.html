@@ -4,29 +4,38 @@
             <md-content class="md-padding">
 
                 <h1 class="md-display-2">Songs</h1>
-                <div layout="row">
+                <div layout="column">
+                    <div flex="33" layout="row" layout-align="center center">
+                        Now playing
+                    </div>
                     <div flex="66">
-                        <md-grid-list md-cols-gt-md="12" md-cols-sm="3" md-cols-md="8"
-                                      md-row-height-gt-md="1:1" md-row-height="4:3"
-                                      md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
-                            <md-grid-tile ng-repeat="song in songs"
-                                          md-colspan-gt-sm="2"
-                                          md-rowspan-gt-sm="2">
+                        <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="song in songs">
+                                <img ng-src="{{song.CoverUrl}}" class="md-avatar" alt="{{song.Title}}" />
+                                <div class="md-list-item-text">
+                                    <h3>{{ song.Title }}</h3>
+                                    <h4>{{ song.Author.FullName }}</h4>
+                                </div>
+                                <div layout="row" layout-align="center center">
+                                    <md-button class="md-fab md-mini md-primary" ng-click="updateSong(song)">
+                                        <div layout="column" layout-align="center center">
+                                            <md-icon style="padding-top:5px" md-font-icon="fa fa-pencil" aria-label="Edit song"></md-icon>
+                                        </div>
+                                    </md-button>
+                                    <md-button class="md-fab md-mini md-primary" ng-click="deleteSong(song)">
+                                        <div layout="column" layout-align="center center">
+                                            <md-icon style="padding-top:5px" md-font-icon="fa fa-trash-o" aria-label="Edit song"></md-icon>
+                                        </div>
+                                    </md-button>
+                                </div>
+
+                                <md-divider></md-divider>
+                            </md-list-item>
 
 
-                                <md-grid-tile-footer><h3>{{song.Title}}</h3></md-grid-tile-footer>
-                            </md-grid-tile>
-                        </md-grid-list>
-
-
-
-
-
-                        
+                        </md-list>
                     </div>
-                    <div flex="33">
-                       Now playing
-                    </div>
+
                 </div>
 
 

@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using Newtonsoft.Json;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -14,6 +15,8 @@ namespace Soundy.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
     }
 }

@@ -37,6 +37,8 @@ namespace Soundy.Core.Repositories
             return orderBy != null ? orderBy(query).ToList() : query.ToList();
         }
 
+
+
         public virtual Task<IEnumerable<T>> GetAsync(
          Expression<Func<T, bool>> filter = null,
          Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
@@ -44,7 +46,6 @@ namespace Soundy.Core.Repositories
         {
             return Task.Run(() => Get(filter, orderBy, includeProperties));
         }
-
 
 
         public virtual T Get(object id)
@@ -63,8 +64,8 @@ namespace Soundy.Core.Repositories
         }
         public virtual void Update(T entityToUpdate)
         {
-            DbSet.Attach(entityToUpdate);
             Context.Entry(entityToUpdate).State = EntityState.Modified;
+            DbSet.Attach(entityToUpdate);
         }
         public virtual void Delete(object id)
         {

@@ -1,0 +1,50 @@
+﻿<md-dialog aria-label="Edit song">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Edit song</h2>
+            <span flex></span>
+            <md-button class="md-icon-button">
+                <md-icon clas aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+
+        <form name="songForm" novalidate>
+            <md-input-container>
+                <md-icon class="fa fa-pencil"></md-icon>
+                <input ng-model="currentUpdateSong.Title" name="title" type="text" >
+                <br />
+
+            </md-input-container>
+            <md-input-container>
+                <md-icon class="fa fa-pencil"></md-icon>
+                <input ng-model="currentUpdateSong.CoverUrl" type="text" placeholder="Cover Url" name="coverUrl">
+                <br />
+
+            </md-input-container>
+            <md-input-container>
+                <md-icon class="fa fa-pencil"></md-icon>
+                <input ng-model="currentUpdateSong.FileUrl" type="text" placeholder="File Url" ng-required="true" name="fileUrl">
+                <br />
+
+            </md-input-container>
+            <md-select placeholder="Author" ng-model="song.AuthorId" >
+                <md-option name="author" ng-repeat="author in authors" value="{{author.Id}}">{{author.FullName}}</md-option>
+                <br />
+
+
+            </md-select>
+            <br />
+
+
+            <md-button class="md-raised md-primary" ng-click="updateSong(currentUpdateSong)" ng-disabled="songForm.$invalid">
+                <i class="fa fa-plus"></i>
+                SAVE
+            </md-button>
+        </form>
+
+    </md-dialog-content>
+
+</md-dialog>

@@ -1,0 +1,58 @@
+﻿<md-dialog aria-label="Add author">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add author</h2>
+            <span flex></span>
+            <md-button class="md-icon-button">
+                <md-icon clas aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+
+        <form name="authorForm" novalidate>
+            <md-input-container>
+                <md-icon class="fa fa-pencil"></md-icon>
+                <input ng-model="author.FullName" name="fullName" type="text" placeholder="Full name" ng-required="true">
+                <br />
+            </md-input-container>
+
+            <md-input-container>
+                <md-icon class="fa fa-pencil"></md-icon>
+                <input ng-model="author.ProfilePhotoUrl" name="profilePhoto" type="text" placeholder="Profile photo url" ng-required="true">
+                <br />
+            </md-input-container>
+
+
+            <md-input-container>
+                <p> <md-icon class="fa fa-pencil"></md-icon> Birth Date</p>
+                <datepicker date-format="yyyy-MM-dd">
+                    <input ng-model="author.Birthdate" type="text" name="birthdate">
+                </datepicker>
+            </md-input-container>
+
+
+            <p ng-show="authorForm.fullName.$invalid && !authorForm.fullName.$pristine" style="color:red">
+                <i class="fa fa-warning"></i>
+                Author full name is required.
+            </p>
+            <p ng-show="authorForm.profilePhoto.$invalid && !authorForm.profilePhoto.$pristine" style="color:red">
+                <i class="fa fa-warning"></i>
+                Author profile photo is required.
+            </p>
+            <p ng-show="authorForm.birthdate.$invalid && !authorForm.birthdate.$pristine" style="color:red">
+                <i class="fa fa-warning"></i>
+                Author birthdate is required.
+            </p>
+
+
+            <md-button class="md-raised md-primary" ng-click="addAuthor(author)" ng-disabled="authorForm.$invalid">
+                <i class="fa fa-plus"></i>
+                SAVE
+            </md-button>
+        </form>
+
+    </md-dialog-content>
+
+</md-dialog>

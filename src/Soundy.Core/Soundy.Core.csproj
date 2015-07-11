@@ -50,7 +50,9 @@
   <ItemGroup>
     <Compile Include="Common\FisherYates.cs" />
     <Compile Include="DTOs\AuthorDTO.cs" />
+    <Compile Include="DTOs\CreateSongDTO.cs" />
     <Compile Include="DTOs\PlaylistDTO.cs" />
+    <Compile Include="DTOs\SimpleAuthorDTO.cs" />
     <Compile Include="DTOs\SongDTO.cs" />
     <Compile Include="Mappers\AuthorMapper.cs" />
     <Compile Include="Mappers\PlaylistMapper.cs" />

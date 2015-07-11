@@ -5,8 +5,7 @@ app.service('songsService', songsService);
 
 songsService.$inject = ['$http', '$q'];
 
-function songsService($http, $q)
-{
+function songsService($http, $q) {
     function getSongs() {
         var deffered = $q.defer();
         $http.get('api/songs/get').success(function (data) {
@@ -39,7 +38,11 @@ function songsService($http, $q)
 
     function addSong(song) {
         var deffered = $q.defer();
-        $http.post('api/songs/create', song).success(function (data) {
+        $http.post('api/songs/create', song, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function (data) {
             deffered.resolve(data);
         }).error(function (error) {
             deffered.reject(error);
@@ -59,7 +62,7 @@ function songsService($http, $q)
 
     function deleteSong(song) {
         var deffered = $q.defer();
-        $http.delete('api/songs/delete' + song.Id).success(function (data) {
+        $http.delete('api/songs/delete/' + song.Id).success(function (data) {
             deffered.resolve(data);
         }).error(function (error) {
             deffered.reject(error);

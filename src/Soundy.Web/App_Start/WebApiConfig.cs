@@ -16,7 +16,7 @@ namespace Soundy.Web
 
          
 
-            config.Routes.MapHttpRoute(
+           config.Routes.MapHttpRoute(
                 name: "MasterApi",
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
@@ -27,16 +27,16 @@ namespace Soundy.Web
                routeTemplate: "api/{controller}/search/{searchTerm}",
                defaults: new { searchTerm = RouteParameter.Optional }
             );
-
+        
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
+            ); 
 
-            var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
-            config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+            config.Formatters.Clear();
+            config.Formatters.Add(new JsonMediaTypeFormatter());
         }
     }
 }

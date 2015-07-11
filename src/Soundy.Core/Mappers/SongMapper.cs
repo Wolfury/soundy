@@ -47,6 +47,18 @@ namespace Soundy.Core.Mappers
                 Author = AuthorMapper.Map(input.Author)
             };
         }
+
+        public static Song Map(CreateSongDTO input)
+        {
+            return new Song
+            {
+                Title = input.Title,
+                CoverUrl = input.CoverUrl,
+                FileUrl = input.FileUrl,
+                DateReleased = DateTime.Now,
+                AuthorId = input.AuthorId
+            };
+        }
         public static ICollection<Song> Map(IEnumerable<SongDTO> input)
         {
             return input.Select(x => new Song()

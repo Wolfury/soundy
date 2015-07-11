@@ -25,7 +25,7 @@ namespace Soundy.Data.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
             modelBuilder.Entity<Playlist>()
                 .HasMany(x => x.Songs)
                 .WithMany(x => x.Playlists)

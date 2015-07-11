@@ -1,4 +1,4 @@
-﻿var app = angular.module("Soundy", ['ngRoute', 'ngAnimate', 'ngSanitize', 'ngMaterial']);
+﻿var app = angular.module("Soundy", ['ngRoute', 'ngAnimate', 'ngSanitize', 'ngMaterial', '720kb.datepicker']);
 
 app.config(function ($routeProvider) {
     $routeProvider.when("/songs/list", {

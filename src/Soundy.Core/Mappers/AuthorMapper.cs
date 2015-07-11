@@ -42,6 +42,7 @@ namespace Soundy.Core.Mappers
                 BirthDate = input.BirthDate
             };
         }
+
         public static ICollection<Author> Map(IEnumerable<AuthorDTO> input)
         {
             return input.Select(x => new Author()

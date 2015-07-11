@@ -13,9 +13,11 @@ using Soundy.Core.Repositories;
 using Soundy.Data.Model;
 using WebGrease.Css.Extensions;
 using Soundy.Core.Common;
+using Newtonsoft.Json;
 
 namespace Soundy.Web.Controllers
 {
+    [RoutePrefix("api/songs")]
     public class SongsController : ApiController
     {
         [Inject]
@@ -28,9 +30,9 @@ namespace Soundy.Web.Controllers
 
         #region CRUD
 
-        public Task<ICollection<SongDTO>> Get()
+        public async Task<IEnumerable<Song>> Get()
         {
-            return Task.Run(async () => SongMapper.Map(await SongRepository.GetAsync()));
+            return (await SongRepository.GetAsync(null, null, "Author")).OrderByDescending(song => song.DateReleased);
         }
 
         public async Task<IHttpActionResult> Get(int id)
@@ -43,13 +45,20 @@ namespace Soundy.Web.Controllers
             return NotFound();
         }
 
-        public async Task<IHttpActionResult> Create([FromBody]SongDTO model)
+
+        public async Task<IHttpActionResult> Create(CreateSongDTO model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             SongRepository.Insert(SongMapper.Map(model));
             await SongRepository.SaveAsync();
             return Ok();
         }
 
+
+        [HttpPut]
         public async Task<IHttpActionResult> Update(int id, [FromBody]SongDTO model)
         {
             SongRepository.Update(SongMapper.Map(model));

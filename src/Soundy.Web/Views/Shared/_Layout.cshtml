@@ -5,11 +5,12 @@
     <base href="/">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Soundy</title>
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="@Url.Content("~/Content/css/angular-datepicker.min.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/css/toastr.css")" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -34,11 +35,11 @@
                         <input ng-model="searchTerm" type="text" placeholder="Search" style="color:white;">
                     </md-input-container>
 
-                    <md-button class="md-icon-button" aria-label="Refresh">
-                        <md-icon class="fa fa-refresh fa-2x" style="color: greenyellow;"></md-icon>
+                    <md-button class="md-icon-button" aria-label="Search" ng-click="search(searchTerm)">
+                        <md-icon class="fa fa-search fa-2x"></md-icon>
                     </md-button>
-                    <md-button class="md-icon-button" aria-label="Settings">
-                        <md-icon class="fa fa-cog fa-2x"></md-icon>
+                    <md-button class="md-icon-button" aria-label="Status" ng-show="isBusy">
+                        <md-icon class="fa fa-refresh fa-2x fa-spin"></md-icon>
                     </md-button>
                 </div>
 
@@ -46,22 +47,22 @@
         </md-content>
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
             <md-toolbar class="md-theme-light">
-                <h1 class="md-toolbar-tools">Sidenav Right</h1>
+                <h1 class="md-toolbar-tools">
+                    Menu
+                </h1>
             </md-toolbar>
             <md-content layout-padding>
-                <form>
-                    <md-input-container>
-                        <label for="testInput">Test input</label>
-                        <input type="text" id="testInput"
-                               ng-model="data" md-sidenav-focus>
-                    </md-input-container>
-                </form>
+                <br />
                 <md-button ng-click="showAddSong()" class="md-primary">
-                    <i class="fa fa-plus"></i> ADD SONG
+                    <i class="fa fa-plus"></i> &nbsp; ADD SONG
+                </md-button>
+                <br />
+                <md-button ng-click="showAddAuthor()" class="md-primary">
+                    <i class="fa fa-plus"></i> &nbsp; ADD AUTHOR
                 </md-button>
                 <br />
                 <md-button ng-click="showAddPlaylist()" class="md-primary">
-                    <i class="fa fa-plus"></i> ADD PLAYLIST
+                    <i class="fa fa-plus"></i> &nbsp; ADD PLAYLIST
                 </md-button>
                 <br />
                 <md-button ng-click="closeNav()" class="md-primary">

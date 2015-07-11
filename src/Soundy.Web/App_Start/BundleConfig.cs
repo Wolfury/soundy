@@ -25,7 +25,8 @@ namespace Soundy.Web
                       "~/Scripts/Vendor/Angular/angular-mocks.js",
                       "~/Scripts/Vendor/Angular/angular-animate.js",
                       "~/Scripts/Vendor/Angular/angular-route.js",
-                      "~/Scripts/Vendor/Angular/angular-sanitize.js"));
+                      "~/Scripts/Vendor/Angular/angular-sanitize.js",
+                      "~/Scripts/Vendor/Angular/angular-datepicker.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                        "~/Scripts/App/app.js",
