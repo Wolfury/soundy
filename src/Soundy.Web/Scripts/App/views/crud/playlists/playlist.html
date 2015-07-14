@@ -1,6 +1,6 @@
 ﻿<div>
 
-    <h1>{{playlist.Title}}</h1>
+    <h1>{{ playlist.Title }}</h1>
 
     <div layout="column">
         <div flex="33" layout="row" layout-align="center center">
@@ -8,7 +8,7 @@
                 <md-card-content>
                     <h2 class="md-title">Now playing</h2>
                     <p>
-                        {{nowPlaying.Title}}
+                        {{ nowPlaying.Title }}
                     </p>
                 </md-card-content>
                 <div class="md-actions" layout="row" layout-align="end center">
@@ -30,15 +30,15 @@
         <div flex="66">
             <md-list>
                 <md-list-item class="md-3-line" ng-repeat="song in playlist.Songs">
-                    <img ng-src="{{song.CoverUrl}}" class="md-avatar" alt="{{song.Title}}" />
+                    <img ng-src="{{ song.CoverUrl }}" class="md-avatar" alt="{{ song.Title }}" />
                     <div class="md-list-item-text">
                         <h3>{{ song.Title }}</h3>
                         <h4>{{ song.Author.FullName }}</h4>
                     </div>
                     <div layout="row" layout-align="center center">
-                        <md-button class="md-fab md-mini md-primary" ng-clicenterck="deleteFromPlaylist(song)">
+                        <md-button class="md-fab md-mini md-primary" ng-clicenterck="removeSongFromPlaylist(playlist,song)">
                             <div layout="column" layout-align="center ">
-                                <md-icon style="padding-top:5px" md-font-icon="fa fa-trash-o" aria-label="Edit song"></md-icon>
+                                <md-icon style="padding-top:10px" md-font-icon="fa fa-trash-o" aria-label="Edit song"></md-icon>
                             </div>
                         </md-button>
                     </div>

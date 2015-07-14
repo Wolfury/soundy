@@ -4,20 +4,8 @@ app.controller('PlaylistDetailsController', ['$scope', '$rootScope', 'songsServi
 
     activate();
     $rootScope.playlist = {};
-
-    $scope.shuffleSongs = function () {
-        var promise = songsService.shuffleSongsInPlaylist();
-        promise.then(function (data) {
-            $rootScope.songs = data;
-            if ($rootScope.songs.length == 0) {
-                toastr.info("There are no songs.");
-            }
-        }, function (error) {
-            toastr.error(error.Message);
-        }).finally(function () {
-            $rootScope.isBusy = false;
-        });
-    };
+    $scope.shuffleSongs = function () { };
+   
 
     $scope.showAddSongToPlaylist = function () {
 
@@ -30,6 +18,17 @@ app.controller('PlaylistDetailsController', ['$scope', '$rootScope', 'songsServi
     };
 
 
+    $scope.removeSongFromPlaylist = function (playlist, song) {
+        var promise = playlistsService.removeSongFromPlaylist(playlist, song);
+        $rootScope.isBusy = true;
+        promise.then(function (data) { activate(); toastr.success("Removed song from playlist!"); },
+            function (error) { toastr.error(error.Message); })
+                .finally(function () {
+                    $rootScope.isBusy = false;
+                });
+    };
+
+
 
 
     function activate() {
@@ -38,6 +37,24 @@ app.controller('PlaylistDetailsController', ['$scope', '$rootScope', 'songsServi
         $rootScope.isBusy = true;
         promise.then(function (playlist) {
             $rootScope.playlist = playlist;
+            $rootScope.nowPlaying = playlist.Songs[0];
+
+            $scope.shuffleSongs = function () {
+                var promise = playlistsService.shuffleSongs(playlist);
+                promise.then(function (data) {
+                    $rootScope.playlist.songs = data;
+                    if ($rootScope.songs.length == 0) {
+                        toastr.info("There are no songs.");
+                    }
+                }, function (error) {
+                    toastr.error(error.Message);
+                }).finally(function () {
+                    $rootScope.isBusy = false;
+                });
+            };
+
+
+
         }, function (error) {
             toastr.error(error.Message);
         }).finally(function () { $rootScope.isBusy = false; });
@@ -46,7 +63,7 @@ app.controller('PlaylistDetailsController', ['$scope', '$rootScope', 'songsServi
     }
 }]);
 
-function AddSongToPlaylistDialogController($scope, $location,$rootScope, $mdDialog, playlistsService, $route) {
+function AddSongToPlaylistDialogController($scope, $location, $rootScope, $mdDialog, playlistsService, $route) {
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -57,7 +74,7 @@ function AddSongToPlaylistDialogController($scope, $location,$rootScope, $mdDial
         $mdDialog.hide(answer);
     };
 
-    $scope.song = {}; 
+    $scope.song = {};
     $scope.songs = $rootScope.songs;
     $scope.playlist = $rootScope.playlist;
 

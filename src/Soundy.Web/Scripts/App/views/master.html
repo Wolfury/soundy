@@ -68,7 +68,7 @@
 
                                 <a class="md-button md-fab md-mini md-primary" href="/playlist/{{playlist.Id}}">
                                     <div layout="column" layout-align="center center">
-                                        <md-icon style="padding-top:10px" md-font-icon="fa fa-info" aria-label="Open playlist"></md-icon>
+                                        <md-icon style="padding-top:15px" md-font-icon="fa fa-info" aria-label="Open playlist"></md-icon>
                                     </div>
                                 </a>
 
@@ -94,7 +94,19 @@
         </md-tab>
         <md-tab label="authors">
             <md-content class="md-padding">
-                <h1 class="md-display-2">Tab Three</h1>
+                <md-content layout-padding>
+                    <md-grid-list md-cols-gt-md="12" md-cols-sm="3" md-cols-md="8"
+                                  md-row-height-gt-md="1:1" md-row-height="4:3"
+                                  md-gutter-gt-md="20px" md-gutter-gt-sm="8px" md-gutter="4px">
+                        <md-grid-tile ng-repeat="author in authors"
+                                      md-colspan-gt-sm="3"
+                                      md-rowspan-gt-sm="3">
+
+                            <img class="md-icon" src="{{author.ProfilePhotoUrl}}" alt="{{author.FullName}}" />
+                            <md-grid-tile-footer><h3>{{author.FullName}}</h3></md-grid-tile-footer>
+                        </md-grid-tile>
+                    </md-grid-list>
+                </md-content>
             </md-content>
         </md-tab>
     </md-tabs>

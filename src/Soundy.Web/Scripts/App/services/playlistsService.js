@@ -76,6 +76,18 @@ function playlistsService($http, $q) {
 
     }
 
+
+    function removeSongFromPlaylist(playlist, song) {
+        var deffered = $q.defer();
+
+        $http.post('api/playlists/removesongfromplaylist/' + playlist.Id, song)
+            .success(function (response) { deffered.resolve(response); })
+            .error(function (response) { deffered.reject(response); });
+
+        return deffered.promise;
+
+    }
+
     this.getPlaylists = getPlaylists;
     this.shuffleSongs = shuffleSongs;
     this.getPlaylist = getPlaylist;
@@ -83,4 +95,5 @@ function playlistsService($http, $q) {
     this.updatePlaylist = updatePlaylist;
     this.deletePlaylist = deletePlaylist;
     this.addSongToPlaylist = addSongToPlaylist;
+    this.removeSongFromPlaylist = removeSongFromPlaylist;
 }

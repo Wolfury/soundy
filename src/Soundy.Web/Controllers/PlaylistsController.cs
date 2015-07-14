@@ -92,13 +92,23 @@ namespace Soundy.Web.Controllers
             return NotFound();
         }
 
+
+        [Route("RemoveSongFromPlaylist/{playlistId}")]
         [HttpPost]
-        public async Task<IHttpActionResult> RemoveSongFromPlaylist([FromUri]int playlistId, [FromBody] SongDTO song)
+        public async Task<IHttpActionResult> RemoveSongFromPlaylist([FromUri]int playlistId, [FromBody] SongDTO songDto)
         {
-            Playlist playlist = await PlaylistRepository.GetAsync(playlistId);
+            Playlist playlist = (await PlaylistRepository.GetAsync(x => x.Id == playlistId, null, "Songs")).FirstOrDefault();
             if (playlist != null)
             {
-                playlist.Songs.Remove(SongMapper.Map(song));
+                Song song = await SongsRepository.GetAsync(songDto.Id);
+                if (song != null)
+                {
+                    if (playlist.Songs.Any(x => x.Id == song.Id))
+                    {
+                        return Ok();
+                    }
+                    playlist.Songs.Remove(song);
+                };
                 await PlaylistRepository.SaveAsync();
                 return Ok();
             }

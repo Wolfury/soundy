@@ -32,6 +32,8 @@ namespace Soundy.Data.Context
                 .Map(x => x.ToTable("PlaylistsSongs")
                     .MapLeftKey("PlaylistId")
                     .MapRightKey("SongId"));
+
+            
         }
 
 

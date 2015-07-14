@@ -52,7 +52,7 @@
         });
     };
     $scope.deletePlaylist = function (playlist) {
-        var promise = playlistsService.deletePlaylist(playlist);
+        var promise = playlistsService.deletePlaylist(playlist.Id);
         $rootScope.isBusy = true;
         promise.then(function (response) {
             activate(); toastr.success("Playlist deleted!");
