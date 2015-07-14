@@ -1,0 +1,36 @@
+﻿<md-dialog aria-label="Update playlist" style="width: 100%; height:100%;">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Update playlist</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon class="fa fa-times" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+
+        <form name="playlistForm" novalidate>
+            <md-input-container>
+                <md-icon class="fa fa-pencil"></md-icon>
+                <input ng-model="currentUpdatePlaylist.Title" name="title" type="text" placeholder="Title" ng-required="true">
+                <br />
+            </md-input-container>
+            <br />
+
+            <p ng-show="playlistForm.title.$invalid && !playlistForm.title.$pristine" style="color:red">
+                <i class="fa fa-warning"></i>
+                Playlist title is required.
+            </p>
+            <br />
+
+            <md-button class="md-raised md-primary" ng-click="updatePlaylist(currentUpdatePlaylist)" ng-disabled="playlistForm.$invalid">
+                <i class="fa fa-plus"></i>
+                SAVE
+            </md-button>
+        </form>
+
+    </md-dialog-content>
+
+</md-dialog>

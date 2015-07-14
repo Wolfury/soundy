@@ -34,7 +34,8 @@ namespace Soundy.Web
                        "~/Scripts/App/services/songsService.js",
                        "~/Scripts/App/services/playlistsService.js",
                        "~/Scripts/App/services/authorsService.js",
-                       "~/Scripts/App/controllers/masterController.js"));
+                       "~/Scripts/App/controllers/masterController.js",
+                       "~/Scripts/App/controllers/playlistDetailsController.js"));
         }
     }
 }

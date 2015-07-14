@@ -1,0 +1,56 @@
+﻿<div>
+
+    <h1>{{playlist.Title}}</h1>
+
+    <div layout="column">
+        <div flex="33" layout="row" layout-align="center center">
+            <md-card>
+                <md-card-content>
+                    <h2 class="md-title">Now playing</h2>
+                    <p>
+                        {{nowPlaying.Title}}
+                    </p>
+                </md-card-content>
+                <div class="md-actions" layout="row" layout-align="end center">
+                    <md-button ng-click="shuffleSongs()">SHUFFLE</md-button>
+                    <md-button>PLAY / PAUSE</md-button>
+                    <md-button>NEXT</md-button>
+                </div>
+                <br />
+
+
+                <md-button class="md-primary" ng-click="showAddSongToPlaylist()">
+                    <i class="fa fa-plus"></i>
+                    ADD SONG
+                </md-button>
+
+            </md-card>
+
+        </div>
+        <div flex="66">
+            <md-list>
+                <md-list-item class="md-3-line" ng-repeat="song in playlist.Songs">
+                    <img ng-src="{{song.CoverUrl}}" class="md-avatar" alt="{{song.Title}}" />
+                    <div class="md-list-item-text">
+                        <h3>{{ song.Title }}</h3>
+                        <h4>{{ song.Author.FullName }}</h4>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                        <md-button class="md-fab md-mini md-primary" ng-clicenterck="deleteFromPlaylist(song)">
+                            <div layout="column" layout-align="center ">
+                                <md-icon style="padding-top:5px" md-font-icon="fa fa-trash-o" aria-label="Edit song"></md-icon>
+                            </div>
+                        </md-button>
+                    </div>
+
+                    <md-divider></md-divider>
+                </md-list-item>
+
+
+            </md-list>
+        </div>
+
+    </div>
+
+
+</div>

@@ -165,7 +165,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaylistsController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
-    <Compile Include="Controllers\SongsEfController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -178,17 +177,20 @@
     <Content Include="Content\css\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="images\grey_arrow_left.svg" />
-    <Content Include="images\grey_arrow_right.svg" />
-    <Content Include="images\white_arrow_left.svg" />
-    <Content Include="images\white_arrow_right.svg" />
+    <Content Include="Images\bg.png" />
+    <Content Include="Images\song.png" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\controllers\masterController.js" />
+    <Content Include="Scripts\App\controllers\playlistDetailsController.js" />
     <Content Include="Scripts\App\controllers\shellController.js" />
     <Content Include="Scripts\App\services\authorsService.js" />
     <Content Include="Scripts\App\services\playlistsService.js" />
     <Content Include="Scripts\App\services\songsService.js" />
     <Content Include="Scripts\App\views\crud\authors\add-author.html" />
+    <Content Include="Scripts\App\views\crud\playlists\add-song.html" />
+    <Content Include="Scripts\App\views\crud\playlists\update-playlist.html" />
+    <Content Include="Scripts\App\views\crud\playlists\create-playlist.html" />
+    <Content Include="Scripts\App\views\crud\playlists\playlist.html" />
     <Content Include="Scripts\App\views\crud\songs\add-song.html" />
     <Content Include="Scripts\App\views\crud\songs\update-song.html" />
     <Content Include="Scripts\App\views\master.html" />
@@ -214,7 +216,6 @@
     <Content Include="Scripts\Vendor\Angular\angular-sanitize.min.js.map" />
     <Content Include="Content\css\toastr.scss" />
     <Content Include="Content\css\toastr.less" />
-    <Content Include="images\.DS_Store" />
     <None Include="Scripts\Vendor\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Vendor\jquery-1.10.2.js" />
     <Content Include="Scripts\Vendor\jquery-1.10.2.min.js" />

@@ -75,9 +75,9 @@ namespace Soundy.Web.Controllers
         #endregion
 
         [HttpGet]
-        public Task<ICollection<SongDTO>> Shuffle()
+        public Task<IEnumerable<Song>> Shuffle()
         {
-            return Task.Run(async () => SongMapper.Map(FisherYates.Shuffle<Song>(((await SongRepository.GetAsync()).ToArray<Song>()))));
+            return Task.Run(async () => FisherYates.Shuffle<Song>(((await SongRepository.GetAsync(null,null,"Author")).ToArray<Song>())));
         }
 
         [HttpGet]

@@ -14,47 +14,50 @@ using Soundy.Core.Common;
 
 namespace Soundy.Web.Controllers
 {
+    [RoutePrefix("api/playlists")]
     public class PlaylistsController : ApiController
     {
         [Inject]
-        public PlaylistsController(IRepository<Playlist> playlistRepository)
+        public PlaylistsController(IRepository<Playlist> playlistRepository, IRepository<Song> songsRepository)
         {
             PlaylistRepository = playlistRepository;
+            SongsRepository = songsRepository;
         }
 
         public IRepository<Playlist> PlaylistRepository { get; set; }
+        public IRepository<Song> SongsRepository { get; set; }
 
         #region CRUD
 
-        public Task<ICollection<PlaylistDTO>> Get()
+        public async Task<IEnumerable<Playlist>> Get()
         {
-            return Task.Run(async () => PlaylistMapper.Map(await PlaylistRepository.GetAsync()));
+            return (await PlaylistRepository.GetAsync(null, null, "Songs")).OrderByDescending(playlist => playlist.DateCreated);
         }
 
         public async Task<IHttpActionResult> Get(int id)
         {
-            var result = await PlaylistRepository.GetAsync(id);
+            var result = (await PlaylistRepository.GetAsync(x => x.Id == id, null, "Songs")).FirstOrDefault();
             if (result != null)
             {
-                return Ok(PlaylistMapper.Map(result));
+                return Ok(result);
             }
             return NotFound();
         }
-
+        [HttpPost]
         public async Task<IHttpActionResult> Create([FromBody]PlaylistDTO model)
         {
             PlaylistRepository.Insert(PlaylistMapper.Map(model));
             await PlaylistRepository.SaveAsync();
             return Ok();
         }
-
+        [HttpPut]
         public async Task<IHttpActionResult> Update(int id, [FromBody]PlaylistDTO model)
         {
             PlaylistRepository.Update(PlaylistMapper.Map(model));
             await PlaylistRepository.SaveAsync();
             return Ok();
         }
-
+        [HttpDelete]
         public async Task<IHttpActionResult> Delete(int id)
         {
             PlaylistRepository.Delete(id);
@@ -66,21 +69,31 @@ namespace Soundy.Web.Controllers
 
         #region Additional
 
-        [HttpGet]
-        public async Task<IHttpActionResult> AddSongToPlaylist(int playlistId, [FromBody] SongDTO song)
+
+        [Route("AddSongToPlaylist/{playlistId}")]
+        [HttpPost]
+        public async Task<IHttpActionResult> AddSongToPlaylist([FromUri]int playlistId, [FromBody] SongDTO songDto)
         {
-            Playlist playlist = await PlaylistRepository.GetAsync(playlistId);
+            Playlist playlist = (await PlaylistRepository.GetAsync(x => x.Id == playlistId, null, "Songs")).FirstOrDefault();
             if (playlist != null)
             {
-                playlist.Songs.Add(SongMapper.Map(song));
+                Song song = await SongsRepository.GetAsync(songDto.Id);
+                if (song != null)
+                {
+                    if (playlist.Songs.Any(x => x.Id == song.Id))
+                    {
+                        return Ok();
+                    }
+                    playlist.Songs.Add(song);
+                };
                 await PlaylistRepository.SaveAsync();
                 return Ok();
             }
             return NotFound();
         }
 
-        [HttpGet]
-        public async Task<IHttpActionResult> RemoveSongFromPlaylist(int playlistId, [FromBody] SongDTO song)
+        [HttpPost]
+        public async Task<IHttpActionResult> RemoveSongFromPlaylist([FromUri]int playlistId, [FromBody] SongDTO song)
         {
             Playlist playlist = await PlaylistRepository.GetAsync(playlistId);
             if (playlist != null)

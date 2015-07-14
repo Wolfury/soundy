@@ -23,9 +23,7 @@
             templateUrl: '/Scripts/App/views/crud/songs/add-song.html',
             parent: angular.element(document.body)
         });
-    }
-
-
+    };
     $scope.showAddAuthor = function () {
         $mdDialog.show({
             controller: AddAuthorDialogController,
@@ -34,6 +32,13 @@
         });
     }
 
+    $scope.showCreatePlaylist = function () {
+        $mdDialog.show({
+            controller: CreatePlaylistDialogController,
+            templateUrl: '/Scripts/App/views/crud/playlists/create-playlist.html',
+            parent: angular.element(document.body)
+        });
+    };
 
 
 
@@ -103,8 +108,6 @@ function AddSongDialogController($scope, $rootScope, $mdDialog, songsService, au
 
 
 }
-
-
 function AddAuthorDialogController($scope, $rootScope, $mdDialog, authorsService) {
     $scope.hide = function () {
         $mdDialog.hide();
@@ -143,6 +146,40 @@ function AddAuthorDialogController($scope, $rootScope, $mdDialog, authorsService
         var promise = authorsService.addAuthor(author);
         promise.then(function (result) {
             toastr.success("Author added!");
+            $scope.hide();
+        }, function (error) {
+            toastr.error(error.Message);
+        }).finally(function () {
+            $rootScope.isBusy = false;
+        });
+    };
+
+
+
+}
+
+
+
+function CreatePlaylistDialogController($scope, $rootScope, $mdDialog, playlistsService) {
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+    $scope.answer = function (answer) {
+        $mdDialog.hide(answer);
+    };
+
+    $scope.playlist = {};
+
+
+    $scope.createPlaylist = function (playlist) {
+        $rootScope.isBusy = true;
+        var promise = playlistsService.createPlaylist(playlist);
+        promise.then(function (result) {
+            $rootScope.playlists.push(playlist);
+            toastr.info("Playlist created!");
             $scope.hide();
         }, function (error) {
             toastr.error(error.Message);

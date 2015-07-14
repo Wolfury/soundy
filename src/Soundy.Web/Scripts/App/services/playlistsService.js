@@ -65,11 +65,22 @@ function playlistsService($http, $q) {
         return deffered.promise;
     }
 
+    function addSongToPlaylist(playlist, song) {
+        var deffered = $q.defer();
+
+        $http.post('api/playlists/addsongtoplaylist/' + playlist.Id, song)
+            .success(function (response) { deffered.resolve(response); })
+            .error(function (response) { deffered.reject(response); });
+
+        return deffered.promise;
+
+    }
+
     this.getPlaylists = getPlaylists;
     this.shuffleSongs = shuffleSongs;
     this.getPlaylist = getPlaylist;
     this.createPlaylist = createPlaylist;
     this.updatePlaylist = updatePlaylist;
     this.deletePlaylist = deletePlaylist;
-
+    this.addSongToPlaylist = addSongToPlaylist;
 }
