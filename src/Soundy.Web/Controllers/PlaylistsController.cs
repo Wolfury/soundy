@@ -114,11 +114,11 @@ namespace Soundy.Web.Controllers
             }
             return NotFound();
         }
-
+     
         [HttpGet]
-        public Task<ICollection<SongDTO>> Shuffle([FromUri]int id, [FromBody] PlaylistDTO playlist)
+        public Task<IEnumerable<Song>> Shuffle([FromUri]int id)
         {
-            return Task.Run(() => SongMapper.Map(FisherYates.Shuffle<Song>(((PlaylistMapper.Map(playlist).Songs).ToArray<Song>()))));
+            return Task.Run(async () => FisherYates.Shuffle<Song>(((await PlaylistRepository.GetAsync(x => x.Id == id, null, "Songs")).FirstOrDefault()).Songs.ToArray<Song>()));
         }
 
         #endregion

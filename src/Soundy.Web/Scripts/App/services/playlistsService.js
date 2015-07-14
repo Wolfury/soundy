@@ -17,7 +17,7 @@ function playlistsService($http, $q) {
     }
     function shuffleSongs(playlist) {
         var deffered = $q.defer();
-        $http.get('api/songs/shuffle/' + playlist.Id, playlist.Songs).success(function (data) {
+        $http.get('api/songs/shuffle/' + playlist.Id).success(function (data) {
             deffered.resolve(data);
         }).error(function (error) {
             deffered.reject(error);

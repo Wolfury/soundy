@@ -42,8 +42,8 @@ app.controller('PlaylistDetailsController', ['$scope', '$rootScope', 'songsServi
             $scope.shuffleSongs = function () {
                 var promise = playlistsService.shuffleSongs(playlist);
                 promise.then(function (data) {
-                    $rootScope.playlist.songs = data;
-                    if ($rootScope.songs.length == 0) {
+                    $rootScope.playlist.Songs = data;
+                    if ($rootScope.playlist.Songs.length == 0) {
                         toastr.info("There are no songs.");
                     }
                 }, function (error) {
